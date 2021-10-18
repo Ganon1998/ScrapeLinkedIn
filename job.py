@@ -74,7 +74,9 @@ while True:
 
 print("Collecting jobs")
 while (i != pages):
+    # wait for page to fully load so all elements load
     browser.implicitly_wait(6)
+    # go to the list of applied jobs and scrape the text from the array
     for Entries in browser.find_elements_by_xpath("//ul[@class='reusable-search__entity-results-list list-style-none']/li"):
         JobsGatheredArray.append(Entries.text)
 
@@ -89,7 +91,7 @@ print("Parsing jobs")
 # parse jobs
 jobEntries = getJobs(JobsGatheredArray)
 
-# get access to a db file I made named MyTable.db
+# get access to a db file I made
 conn = sqlite3.connect('jobDB.db')
 # create cursor object to gain access to methods like commit and execute
 cur = conn.cursor()
